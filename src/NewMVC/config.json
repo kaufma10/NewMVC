@@ -1,0 +1,10 @@
+﻿{
+  "Data": {
+    "DefaultConnection": {
+      "TripsConnectionString": "Server=(localdb)\\MSSQLLocalDB;Database=MyTripsDB;Trusted_Connection=True;"
+    }
+  },
+  "AppSettings": {
+    "BingKey": "JbpYr0rmtKXc5lMPRQex~y29KheoIgS1bkp03r7eRcg~Ao2J_0IgFDkKcojwcsRZ8W0nUf1bH4kaKFh7VY1BA3h0yY-_q-U7R2uJy_ptl2DZ"
+  }
+}
