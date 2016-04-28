@@ -25,9 +25,25 @@ namespace NewMVC.controllers.Web
             };
             var trips = db.GetAllTrips();
             var results = AutoMapper.Mapper.Map<IEnumerable<TripViewModel>>(trips);
-            //var newTrip = AutoMapper.Mapper.Map(trips);
+            var newTrip = AutoMapper.Mapper.Map<Trip>(trips);
 
-            return View();
+            return Json(results);
         }
+
+        public IActionResult Trip(int ?id)
+        {
+            TripsRepository db = new TripsRepository();
+            /*Trip trip = db.
+                db.Albums.Include(a => a.Artist).Include(a => a.Genre).Where(a => a.AlbumID == id).Single();*/
+            var oneTrip = db.GetAllTrips();
+            return Json(oneTrip);
+        }
+        [HttpPost]
+        public IActionResult post(int? id)
+        {
+            TripsRepository db = new TripsRepository();
+            var oneTrip = db.GetAllTrips();
+            return Json(oneTrip);
+        }/**/
     }
 }

@@ -52,6 +52,4 @@ namespace YourAppName.Services
         return result;
         }
     }
-
-
 }

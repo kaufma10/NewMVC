@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,10 @@ namespace NewMVC.models
                Startup.Configuration["Data:DefaultConnection:TripsConnectionString"];
             optionsBuilder.UseSqlServer(connString);
             base.OnConfiguring(optionsBuilder);
+        }
+        public TripContext()
+        {
+            Database.EnsureCreated();
         }
     }
 }

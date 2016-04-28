@@ -12,10 +12,12 @@ namespace NewMVC.models
         {
             return db.Trips.OrderBy(t => t.Name).ToList();
         }
-        /*public post()
+        public IEnumerable<Trip> GetTrip()
         {
-            return ();
-        }*/
+            //return db.Trips.Where(r => r.ID == id).single;
+            return db.Trips.OrderBy(t => t.Name).ToList();
+        }
+        
         private int Order { get; set; }
     }
 }

@@ -7,11 +7,14 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 using NewMVC.models;
+using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MVC6.Models;
 using YourAppName.Services;
+using NewMVC.models.viewmodel;
+
 
 namespace NewMVC
 {
@@ -22,20 +25,19 @@ namespace NewMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddEntityFramework().AddSqlServer().AddDbContext<TripContext>();
+            services.AddEntityFramework().AddSqlServer().AddDbContext<TripContext>(
+                options =>options.UseSqlServer(Configuration["Data:DefaultConnection:TripsConnectionString"]));
             services.AddTransient<TripsSeedData>();
             services.AddScoped<TripsRepository>();
             services.AddScoped<CoordinateService>();
-            //options =>
-            //optionsBuilder.UseSqlServer(connString);
-            services.AddIdentity<AppUser, IdentityRole>(config =>
+            /*services.AddIdentity<AppUser, IdentityRole>(config =>
             {
                 config.User.RequireUniqueEmail = true;
                 config.Password.RequiredLength = 8;
                 config.Password.RequireUppercase = false;
                 config.Password.RequireNonLetterOrDigit = false;
                 config.Cookies.ApplicationCookie.LoginPath = "/Auth/Login";
-            }).AddEntityFrameworkStores<TripContext>();
+            }).AddEntityFrameworkStores<TripContext>();*/
         }
         public static IConfigurationRoot Configuration;
         public Startup(IApplicationEnvironment appEnv)
@@ -53,8 +55,10 @@ namespace NewMVC
             app.UseIISPlatformHandler();
             //app.UseDefaultFiles();
             app.UseStaticFiles();
-            //TripsSeedData seed = new TripsSeedData();
-            //seed.InsertSeedData();
+            /*TripsSeedData seed {
+
+            };
+            seed.InsertSeedData();*/
             app.UseMvc(config =>
             {
                 config.MapRoute(
@@ -63,10 +67,10 @@ namespace NewMVC
                     defaults: new { controller = "home", action = "Index" }
                  );
             });
-            /*AutoMapper.Mapper.Initialize(config =>
+            AutoMapper.Mapper.Initialize(config =>
             {
-                config.CreateMapTripViewModel().ReverseMap();
-            });*/
+                config.CreateMap<Trip, TripViewModel>().ReverseMap();
+            });
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World! I'm Royce!");
