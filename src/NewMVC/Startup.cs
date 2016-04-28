@@ -50,15 +50,12 @@ namespace NewMVC
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, TripsSeedData seed)
         {
             app.UseIISPlatformHandler();
             //app.UseDefaultFiles();
             app.UseStaticFiles();
-            /*TripsSeedData seed {
-
-            };
-            seed.InsertSeedData();*/
+            seed.InsertSeedData();/**/
             app.UseMvc(config =>
             {
                 config.MapRoute(

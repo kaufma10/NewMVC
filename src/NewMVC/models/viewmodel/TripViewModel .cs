@@ -15,5 +15,4 @@ namespace NewMVC.models.viewmodel
         public string Name { get; set; }
         public DateTime CurrentDate { get; set; }
     }
-    //var results = Mapper.Map<IEnumerable<TripViewModel>>(trips);
 }
