@@ -24,8 +24,9 @@ namespace NewMVC.controllers.Web
                 DateMade = DateTime.Now
             };
             var trips = db.GetAllTrips();
-            var results = Mapper.Map<IEnumerable<TripViewModel>>(trips);
-            
+            var results = AutoMapper.Mapper.Map<IEnumerable<TripViewModel>>(trips);
+            //var newTrip = AutoMapper.Mapper.Map(trips);
+
             return View();
         }
     }

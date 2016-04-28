@@ -12,6 +12,10 @@ namespace NewMVC.models
         {
             return db.Trips.OrderBy(t => t.Name).ToList();
         }
+        /*public post()
+        {
+            return ();
+        }*/
         private int Order { get; set; }
     }
 }
