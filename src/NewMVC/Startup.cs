@@ -63,7 +63,10 @@ namespace NewMVC
                     defaults: new { controller = "home", action = "Index" }
                  );
             });
-
+            /*Mapper.Initialize(config =>
+            {
+                config.CreateMapTripViewModel().ReverseMap();
+            });*/
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World! I'm Royce!");
