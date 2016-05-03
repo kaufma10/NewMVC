@@ -12,17 +12,22 @@ namespace NewMVC.controllers
 {
     public class HomeController : Controller
     {
+        private TripsRepository TCDB;
+        TripsRepository db = new TripsRepository();
+        public HomeController(TripsRepository TCDB)
+        {
+            TCDB = new TripsRepository();
+        }
         // GET: /<controller>/
         [Authorize]
         public IActionResult Index()
         {
-            TripsRepository db = new TripsRepository();
             ViewBag.Trip = new Trip()
             {
                 Name = "TripStarter",
                 DateMade = DateTime.Now
             };
-            var trips = db.GetAllTrips();
+            var trips = TCDB.GetAllTrips();
             return View(); // pass trips to view
         }
         // GET: /<controller>/

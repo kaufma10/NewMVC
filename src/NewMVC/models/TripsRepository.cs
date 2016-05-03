@@ -16,11 +16,14 @@ namespace NewMVC.models
         {
             return db.Trips.OrderBy(t => t.Name).ToList();
         }
-        public IEnumerable<Trip> GetTrip(int ?id)
+        public Trip GetTrip(int ?id)
         {
-            return db.Trips.Where(r => r.ID == id);
+            return db.Trips.Where(r => r.ID == id).Single();
         }
-        
+        public Trip Create(int? id)
+        {
+            return db.Trips.Where(r => r.ID == id).Single();
+        }
         private int Order { get; set; }
     }
 }
