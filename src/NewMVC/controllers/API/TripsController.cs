@@ -36,6 +36,7 @@ namespace NewMVC.controllers.Web
             return Json(results);
         }
 
+        [Route("api/[controller]/{tripName}")]
         public JsonResult Trip(int ?id)
         {
             var oneTrip = TCDB.GetTrip(id);

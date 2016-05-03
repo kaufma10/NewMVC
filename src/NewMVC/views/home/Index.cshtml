@@ -1,8 +1,7 @@
-﻿<!DOCTYPE html>
-<!-- saved from url=(0119)https://blackboard.stockton.edu/bbcswebdav/pid-940105-dt-content-rid-3262188_1/courses/21007.201620/Homework/index.html -->
+﻿<!-- saved from url=(0119)https://blackboard.stockton.edu/bbcswebdav/pid-940105-dt-content-rid-3262188_1/courses/21007.201620/Homework/index.html -->
 
 
-    <p>Getting started..</p>
+    <p>Getting started...</p>
     <p>Trip Name: @ViewBag.Trip.Name</p>
     <p>Date Created: @ViewBag.Trip.DateMade</p>
     <form>
@@ -16,34 +15,4 @@
         </div>
         <div><input type="submit" value="Add"></div>
     </form>
-    <script id="hiddenlpsubmitdiv" style="display: none;"></script>
-    <script>try {
-    (function () {
-        for (var lastpass_iter = 0; lastpass_iter < document.forms.length; lastpass_iter++)
-        {
-            var lastpass_f = document.forms[lastpass_iter];
-            if (typeof (lastpass_f.lpsubmitorig2) == "undefined") {
-                lastpass_f.lpsubmitorig2 = lastpass_f.submit;
-                if (typeof (lastpass_f.lpsubmitorig2) == 'object') {
-                    continue;
-                } lastpass_f.submit = function () {
-                    var form = this; var customEvent = document.createEvent("Event");
-                    customEvent.initEvent("lpCustomEvent", true, true);
-                    var d = document.getElementById("hiddenlpsubmitdiv");
-                    if (d) {
-                        for (var i = 0; i < document.forms.length; i++) {
-                            if (document.forms[i] == form) {
-                                if (typeof (d.innerText) != 'undefined') {
-                                    d.innerText = i.toString();
-                                } else {
-                                    d.textContent = i.toString();
-                                }
-                            }
-                        } d.dispatchEvent(customEvent);
-                    } form.lpsubmitorig2();
-                }
-            }
-        }
-    })()
-} catch (e) { }</script>
 Heya. You've been busy, huh?

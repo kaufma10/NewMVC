@@ -61,7 +61,7 @@ namespace NewMVC
                 config.MapRoute(
                     name: "Default",
                     template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "home", action = "Index" }
+                    defaults: new { Controller = "home", action = "Index" }
                  );
             });
             AutoMapper.Mapper.Initialize(config =>

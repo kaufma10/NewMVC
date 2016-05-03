@@ -6,6 +6,7 @@ using Microsoft.AspNet.Mvc;
 using NewMVC.models;
 using AutoMapper;
 using NewMVC.models.viewmodel;
+using YourAppName.Services;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,6 +16,7 @@ namespace NewMVC.controllers.Web
     {
         private TripsRepository SCDB;
         TripsRepository db = new TripsRepository();
+        CoordinateService cr = new CoordinateService();
         public StopsController(TripsRepository SCDB)
         {
             SCDB = new TripsRepository();
@@ -22,8 +24,11 @@ namespace NewMVC.controllers.Web
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return Json(null);
+            var stops = SCDB.GetAllStops();
+            var results = AutoMapper.Mapper.Map<IEnumerable<StopViewModel>>(stops);
+            return Json(results);
         }
+        [Route("api/[controller]/{tripName}")]
         public JsonResult Stop(int? id)
         {
             var oneStop = SCDB.GetStop(id);
@@ -32,14 +37,15 @@ namespace NewMVC.controllers.Web
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Post(StopViewModel trip)
+        public async Task<JsonResult> Post(StopViewModel stop)
         {
             if (ModelState.IsValid)
             {
-                var newStop = Mapper.Map<Stop>(trip);
-                return RedirectToAction("Index");
+                var newStop = Mapper.Map<Stop>(stop);
+                var longlat = await cr.Lookup(newStop.Name);
+                //return RedirectToAction("Index");
             }
-            var results = AutoMapper.Mapper.Map<IEnumerable<StopViewModel>>(trip);
+            var results = AutoMapper.Mapper.Map<IEnumerable<StopViewModel>>(stop);
             return Json(results);
         }
     }
