@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NewMVC.models;
+using NewMVC.models.viewmodel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,10 +22,20 @@ namespace NewMVC.models
         {
             return db.Trips.Where(r => r.ID == id).Single();
         }
-        public Trip Create(int? id)
+        public IEnumerable<Stop> GetAllStops()
         {
-            return db.Trips.Where(r => r.ID == id).Single();
+            return db.Stops.OrderBy(t => t.Name).ToList();
         }
-        private int Order { get; set; }
+        public Stop GetStop(int? id)
+        {
+            return db.Stops.Where(r => r.ID == id).Single();
+        }
+        public Stop Post(Stop stop)
+        {
+            db.Stops.Add(stop);
+            db.SaveChanges();
+            return null;
+        }
+        //private int Order { get; set; }
     }
 }

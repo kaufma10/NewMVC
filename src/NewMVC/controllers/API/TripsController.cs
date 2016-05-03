@@ -32,7 +32,6 @@ namespace NewMVC.controllers.Web
             };
             var trips = TCDB.GetAllTrips();
             var results = AutoMapper.Mapper.Map<IEnumerable<TripViewModel>>(trips);
-            var newTrip = AutoMapper.Mapper.Map<Trip>(trips);
 
             return Json(results);
         }
@@ -43,29 +42,17 @@ namespace NewMVC.controllers.Web
             return Json(oneTrip);
         }
 
-        public JsonResult Create()
-        {
-           
-            return Json(null);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind(include: "Name,DateMade,UserName")] Trip trip)
+        public IActionResult Post(TripViewModel trip)
         {
             if (ModelState.IsValid)
             {
-                /*db.Albums.Add(trip);
-                db.SaveChanges();
-                Trip.add(trip);*/
                 var newTrip = Mapper.Map<Trip>(trip);
                 return RedirectToAction("Index");
             }
-            /*ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", album.ArtistID);
-            var oneTrip = TCDB.GetTrip();
-            ViewBag.ID = new Microsoft.AspNet.Mvc.Rendering.SelectList(TCDB.trips, "ID", "DateMade", "UserName", trip.ID);*/
-            
-            return Json(null);
+            var results = AutoMapper.Mapper.Map<IEnumerable<TripViewModel>>(trip);
+            return Json(results);
         }
     }
 }
