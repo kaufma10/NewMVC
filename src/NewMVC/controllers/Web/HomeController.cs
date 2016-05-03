@@ -8,18 +8,18 @@ using Microsoft.AspNet.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace NewMVC.controllers
+namespace NewMVC.controllers.web
 {
     public class HomeController : Controller
     {
         private TripsRepository TCDB;
         TripsRepository db = new TripsRepository();
-        public HomeController(TripsRepository TCDB)
+        public HomeController(TripsRepository db)
         {
-            TCDB = new TripsRepository();
+            TCDB = db;
         }
         // GET: /<controller>/
-        [Authorize]
+        //[Authorize]
         public IActionResult Index()
         {
             ViewBag.Trip = new Trip()

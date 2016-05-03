@@ -17,9 +17,9 @@ namespace NewMVC.controllers.Web
         private TripsRepository SCDB;
         TripsRepository db = new TripsRepository();
         CoordinateService cr = new CoordinateService();
-        public StopsController(TripsRepository SCDB)
+        public StopsController(TripsRepository db)
         {
-            SCDB = new TripsRepository();
+            SCDB = db;
         }
         // GET: /<controller>/
         public IActionResult Index()

@@ -16,9 +16,9 @@ namespace NewMVC.controllers.Web
     {
         private TripsRepository TCDB;
         TripsRepository db = new TripsRepository();
-        public TripsController(TripsRepository TCDB)
+        public TripsController(TripsRepository db)
         {
-            TCDB = new TripsRepository();
+            TCDB = db;
         }/**/
             
         // GET: /<controller>/

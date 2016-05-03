@@ -78,7 +78,7 @@ namespace NewMVC.controllers.Auth
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    return RedirectToAction(nameof(web.HomeController.Index), "Home");
                 }
                 AddErrors(result);
             }
