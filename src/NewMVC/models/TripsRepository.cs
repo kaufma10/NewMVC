@@ -30,6 +30,12 @@ namespace NewMVC.models
         {
             return db.Stops.Where(r => r.ID == id).Single();
         }
+        public Trip Post(Trip trip)
+        {
+            db.Trips.Add(trip);
+            db.SaveChanges();
+            return null;
+        }
         public Stop Post(Stop stop)
         {
             db.Stops.Add(stop);
