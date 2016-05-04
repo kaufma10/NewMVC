@@ -43,7 +43,6 @@ namespace NewMVC.controllers.Web
             {
                 var newStop = Mapper.Map<Stop>(stop);
                 var longlat = await cr.Lookup(newStop.Name);
-                //return RedirectToAction("Index");
             }
             var results = AutoMapper.Mapper.Map<IEnumerable<StopViewModel>>(stop);
             return Json(results);
