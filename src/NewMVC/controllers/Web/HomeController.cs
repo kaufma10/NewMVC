@@ -19,7 +19,6 @@ namespace NewMVC.controllers.web
             TCDB = db;
         }
         // GET: /<controller>/
-        //[Authorize]
         public IActionResult Index()
         {
             ViewBag.Trip = new Trip()

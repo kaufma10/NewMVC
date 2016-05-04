@@ -26,5 +26,83 @@
             <li ng-repeat="x in list | orderBy:x">{{x}}</li>
         </ul>
     </div>
+    <div ng-app="app-trips">
+        function tripsController($scope, $http) {
+        $scope.trips = [];
+        $scope.errorMessage = "";
+        };
+        $http.get("/api/trips")
+        .then(function (response) {
+        // Success
+        angular.copy(response.data, $scope.trips);
+        }, function (error) {
+        // Failure
+        $scope.errorMessage = "Error loading data";
+        });
+    </div>
+    <div>
+        var app = angular.module("myApp", ["ngRoute"])
+        .config(function ($routeProvider) {
+        });
+        $routeProvider
+        .when("/", {
+        controller: "myController1",
+        templateUrl:
+        "/views/myView1.html"
+        })
+        .when("/page2/:val", {
+        controller: "myController2",
+        templateUrl:
+        "/views/myView2.html"
+        })
+        .otherwise({ redirectTo: "/" });
+    </div>
+    <div>
+        function showMap(stops) {
+
+        if (stops && stops.length > 0) {
+
+        var mapStops = _.map(stops, function (item) {
+        return {
+        lat: item.Latitude,
+        long: item.Longitude,
+        info: item.Name
+        };
+        });
+
+        // Show Map
+        travelMap.createMap({
+        stops: mapStops,
+        selector: "#map",
+        currentStop: 1,
+        initialZoom: 3
+        });
+        }
+
+        }
+    </div>
+    <form novalidate name="newTripForm" ng-submit="addTrip()">
+        <label for="name">Trip Name</label>
+        <input type="text" name="name" ng-model="newTrip.Name"
+               required ng-minlength="5" />
+        <span ng-show="newTripForm.name.$error.required">
+            Name is required.
+        </span>
+        <span ng-show="newTripForm.name.$error.minlength">
+            Name must be at least five characters.
+        </span>
+        <input type="submit" value="Add"
+               ng-disabled="newTripForm.$invalid" />
+    </form>
+    <div ng-show="errorMessage">{{ errorMessage }}</div>
+    <table>
+        <tr ng-repeat="trip in trips">
+            <td>{{ trip.Name }}</td>
+            <td>{{ trip.Created | date:'MM-dd-yyyy' }}</td>
+            <td>
+                <a ng-href="#/editor/{{trip.Name}}">Edit</a>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

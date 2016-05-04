@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Entity;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Storage;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NewMVC.models
 {
-    public class TripContext : DbContext
+    public class TripContext : IdentityDbContext<AppUser>
     {
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Stop> Stops { get; set; }

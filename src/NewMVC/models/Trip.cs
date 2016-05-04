@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNet.Authorization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace NewMVC.models
 {
+    [Authorize]
     public class Trip
     {
         public int ID { get; set; }
