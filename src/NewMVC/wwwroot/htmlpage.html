@@ -27,59 +27,62 @@
         </ul>
     </div>
     <div ng-app="app-trips">
-        function tripsController($scope, $http) {
-        $scope.trips = [];
-        $scope.errorMessage = "";
-        };
-        $http.get("/api/trips")
-        .then(function (response) {
-        // Success
-        angular.copy(response.data, $scope.trips);
-        }, function (error) {
-        // Failure
-        $scope.errorMessage = "Error loading data";
-        });
+        <script>
+            function tripsController($scope, $http) {
+                $scope.trips = [];
+                $scope.errorMessage = "";
+            };
+            $http.get("/api/trips")
+            .then(function (response) {
+                // Success
+                angular.copy(response.data, $scope.trips);
+            }, function (error) {
+                // Failure
+                $scope.errorMessage = "Error loading data";
+            });
+        </script>
     </div>
     <div>
-        var app = angular.module("myApp", ["ngRoute"])
-        .config(function ($routeProvider) {
-        });
-        $routeProvider
-        .when("/", {
-        controller: "myController1",
-        templateUrl:
-        "/views/myView1.html"
-        })
-        .when("/page2/:val", {
-        controller: "myController2",
-        templateUrl:
-        "/views/myView2.html"
-        })
-        .otherwise({ redirectTo: "/" });
+        <script>
+            var app = angular.module("myApp", ["ngRoute"])
+            .config(function ($routeProvider) {
+            });
+            $routeProvider
+            .when("/", {
+                controller: "myController1",
+                templateUrl:
+                "/views/myView1.html"
+            })
+            .when("/page2/:val", {
+                controller: "myController2",
+                templateUrl:
+                "/views/myView2.html"
+            })
+            .otherwise({ redirectTo: "/" });
+        </script>
     </div>
     <div>
-        function showMap(stops) {
+        <script>
+            function showMap(stops) {
+                if (stops && stops.length > 0) {
+                    var mapStops = _.map(stops, function (item) {
+                        return {
+                            lat: item.Latitude,
+                            long: item.Longitude,
+                            info: item.Name
+                        };
+                    });
 
-        if (stops && stops.length > 0) {
-
-        var mapStops = _.map(stops, function (item) {
-        return {
-        lat: item.Latitude,
-        long: item.Longitude,
-        info: item.Name
-        };
-        });
-
-        // Show Map
-        travelMap.createMap({
-        stops: mapStops,
-        selector: "#map",
-        currentStop: 1,
-        initialZoom: 3
-        });
-        }
-
-        }
+                    // Show Map
+                    travelMap.createMap({
+                        stops: mapStops,
+                        selector: "#map",
+                        currentStop: 1,
+                        initialZoom: 3
+                    });
+                }
+            }
+        </script>
     </div>
     <form novalidate name="newTripForm" ng-submit="addTrip()">
         <label for="name">Trip Name</label>
