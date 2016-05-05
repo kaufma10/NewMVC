@@ -40,23 +40,31 @@
                 // Failure
                 $scope.errorMessage = "Error loading data";
             });
+            $http.post("/api/trips")
+            .then(function (response) {
+                // Success
+                angular.copy(response.data, $scope.trips);
+            }, function (error) {
+                // Failure
+                $scope.errorMessage = "Error saving data";
+            });
         </script>
     </div>
-    <div>
+    <div ng-view>
         <script>
             var app = angular.module("myApp", ["ngRoute"])
             .config(function ($routeProvider) {
             });
             $routeProvider
             .when("/", {
-                controller: "myController1",
+                controller: "StopsController",
                 templateUrl:
-                "/views/myView1.html"
+                "/views/home/Index.html"
             })
             .when("/page2/:val", {
-                controller: "myController2",
+                controller: "TripsController",
                 templateUrl:
-                "/views/myView2.html"
+                "/views/home/Index.html"
             })
             .otherwise({ redirectTo: "/" });
         </script>
