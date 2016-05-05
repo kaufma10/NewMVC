@@ -7,6 +7,7 @@ using NewMVC.models;
 using AutoMapper;
 using NewMVC.models.viewmodel;
 using YourAppName.Services;
+using Microsoft.AspNet.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,7 +35,7 @@ namespace NewMVC.controllers.Web
             var oneStop = SCDB.GetStop(id);
             return Json(oneStop);
         }
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> Post(StopViewModel stop)

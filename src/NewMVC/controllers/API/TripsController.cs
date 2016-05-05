@@ -37,6 +37,7 @@ namespace NewMVC.controllers.Web
         }
 
         [Route("api/[controller]/{tripName}")]
+        [Authorize]
         public JsonResult Trip(int ?id)
         {
             var oneTrip = TCDB.GetTrip(id);
@@ -45,6 +46,7 @@ namespace NewMVC.controllers.Web
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult Post(TripViewModel trip)
         {
             if (ModelState.IsValid)
